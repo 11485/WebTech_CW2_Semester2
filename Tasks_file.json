@@ -1,0 +1,33 @@
+[
+    {
+      "id": 1,
+      "title": "“The Speed of Light.”",
+      "text": "Buy a turtle. Name it “The Speed of Light.” Tell everyone that I can run faster than The Speed of Light.",
+      "status" : "completed"
+    }
+    ,
+    {
+      "id": 2,
+      "title": "Lets play tennis at 14:00",
+      "text": "suhrob is going to play tennis today at 14:00 with friend",
+      "status" : "to-do"
+    }
+    ,
+    {
+      "id": 3,
+      "title": "Meeting with CEO of Tesla",
+      "text": "Discuss about patential income that we get when we cooperate with them",
+      "status" : "to-do"
+    }
+    ,{
+      "id": 4,
+      "title": "Westminster International University in Tashkent",
+      "text": "Web Technology CW2",
+      "status" : "progress"
+    },{
+      "id": 5,
+      "title": "Westminster International University in Tashkent",
+      "text": "Web Technology CW22",
+      "status" : "completed"
+    }
+]

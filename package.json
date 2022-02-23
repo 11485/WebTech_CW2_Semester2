@@ -1,0 +1,24 @@
+{
+  "name": "webtech_cw2_semester2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShakhPortfolio/WebTech_CW2_Semester2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShakhPortfolio/WebTech_CW2_Semester2/issues"
+  },
+  "homepage": "https://github.com/ShakhPortfolio/WebTech_CW2_Semester2#readme",
+  "dependencies": {
+    "as": "^0.4.1",
+    "express": "^4.17.3",
+    "pug": "^3.0.2"
+  }
+}

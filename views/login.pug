@@ -1,0 +1,10 @@
+extends layout.pug 
+block content 
+    if error = true
+        p wrong info
+    else 
+        form(action='/account' method='POST')
+        h1 Hey, please log in here
+        input(type='text' placeholder='Username' name='userUsername')
+        input(type='password' placeholder='Password' name='userPassword')
+        button Log in 
