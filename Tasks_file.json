@@ -1,33 +1,24 @@
 [
-    {
-      "id": 1,
-      "title": "“The Speed of Light.”",
-      "text": "Buy a turtle. Name it “The Speed of Light.” Tell everyone that I can run faster than The Speed of Light.",
-      "status" : "completed"
-    }
-    ,
-    {
-      "id": 2,
-      "title": "Lets play tennis at 14:00",
-      "text": "suhrob is going to play tennis today at 14:00 with friend",
-      "status" : "to-do"
-    }
-    ,
-    {
-      "id": 3,
-      "title": "Meeting with CEO of Tesla",
-      "text": "Discuss about patential income that we get when we cooperate with them",
-      "status" : "to-do"
-    }
-    ,{
-      "id": 4,
-      "title": "Westminster International University in Tashkent",
-      "text": "Web Technology CW2",
-      "status" : "progress"
-    },{
-      "id": 5,
-      "title": "Westminster International University in Tashkent",
-      "text": "Web Technology CW22",
-      "status" : "completed"
-    }
+
+  {
+    "id": "ylpnalxab",
+    "title": "Default CSS Settings",
+    "text": "International Foundation Year offers orientation and preparation for an academic program. Jacobs University Germany",
+    "status": "to-do",
+    "time": { "LocalTime": "8:45:58 PM", "Day": 25, "LocalDate": "2/25/2022" }
+  },
+  {
+    "id": "v3wf6yc81",
+    "title": "Definition and Usage",
+    "text": "W3Schools is optimized for learning and training. Examples might be simplified to improve reading and learning. Tutorials, references, and examples are constantly reviewed to avoid errors, but we cannot warrant full correctness of all content.",
+    "status": "progress",
+    "time": { "LocalTime": "8:46:16 PM", "Day": 25, "LocalDate": "2/25/2022" }
+  },
+  {
+    "id": "9yyre96fp",
+    "title": "What is a Task Management Tool?",
+    "text": "A task management tool is used by an individual, team, or organization to help complete projects more efficiently by organizing and prioritizing related tasks. Task management tools come in many forms, like basic spreadsheets or online project management applications. At every level, task management tools help people:",
+    "status": "completed",
+    "time": { "LocalTime": "8:46:30 PM", "Day": 25, "LocalDate": "2/25/2022" }
+  }
 ]
