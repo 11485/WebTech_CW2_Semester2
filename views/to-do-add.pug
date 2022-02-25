@@ -1,4 +1,13 @@
 extends layout.pug 
 block content 
     include includes/nav.pug
-    
+    .my_container 
+
+        if error
+            p.bg-danger Length
+        
+        form(action='/add-new/to-do' method='POST')
+            input(name='title' type='text' placeholder='Task title')
+            br
+            input(name='text' type='text' placeholder='Some texts')
+            button Save
