@@ -1,9 +1,20 @@
-
 header 
-    div(class='my_container header-nav')
-        .logo 
-            
-            img(src="/WebTech_CW2_Semester2/public/images/logo.png")
+    div(class='my_container header-nav d-flex flex-row justify-content-between align-items-center px-3')
+        .logo(class='d-flex flex-row justify-content-between align-items-center')     
+            .logo-img-div
+                img(class='img-fluid w-75' src="https://raw.githubusercontent.com/ShakhPortfolio/WebTech_CW2_Semester2/main/public/images/logo.png")
+            .logo-search(class='d-flex flex-row justify-content-start align-items-center w-75')
+                i(class='fas fa-search py-1 px-2')
+                input(class='py-1 px-2 w-75 border border-white ' type='text' placeholder='search..')
+        .user-account(class='d-flex flex-row justify-content-between align-items-center ') 
+            .account 
+                i(class="fas fa-info-circle mx-2")
+                i(class='fas fa-bell mx-2')
+                a(href='/' class='mx-2') Elon Musk
+                    i(class="fas fa-caret-down mx-1")
+            .account-img-div
+                img(class='img-fluid' src="https://raw.githubusercontent.com/ShakhPortfolio/WebTech_CW2_Semester2/main/public/images/user.png")
+
 
 
 
