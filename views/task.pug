@@ -1,9 +1,28 @@
 extends layout.pug 
 block content 
     include includes/nav.pug
-    .t_main_div
-        h1= task.title
-        p= task.text
-        
- 
-    
+    .my_container.task-showcase(class='p-3 bg-light')
+        - try {
+            h1.p-1.px-1 #{task.title}
+            ul 
+                li.h5 #{task.text}
+                li.text-muted Date posted: #{task.time.LocalDate}
+                
+            form.p-2(action='/to-do/change' method='POST')
+                select.mx-2.form-select.form-select-sm
+                    
+                    option(value="0")= task.status
+                    if task.status == 'to-do'
+                        option(value="1") Progress 
+                        option(value="2") Completed 
+                    if task.status == 'progress'
+                        option(value="0") To-do
+                        option(value="2") Completed 
+                    if task.status == 'completed'
+                        option(value="0") To-do
+                        option(value="1") Progress 
+                button.btn.btn-sm.btn-primary.m-2 Save
+        - } catch{
+            p.d-inline-block.text-danger not found
+            img.d-block(src='https://raw.githubusercontent.com/ShakhPortfolio/WebTech_CW2_Semester2/main/public/images/error.png')
+        - }
