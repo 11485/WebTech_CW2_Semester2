@@ -1,6 +1,122 @@
 extends layout.pug 
 block content 
     include includes/nav.pug
-    .my_container
-        h3()
-        
+
+    .div(class='my_container main bg-light d-flex flex-row justify-content-between align-items-start')
+
+        //- SIDEBAR STARTS HERE
+        .sidebar(class='bg-white d-flex flex-column align-items-center text-center py-3')
+            a(href='/')
+                i(class='fas fa-home  my-2 p-3')
+            a(href='/')
+                i(class='fas fa-home  my-2 p-3')
+            a(href='/')
+                i(class='fas fa-home  my-2 p-3')
+            a(href='/')
+                i(class='fa-solid fa-gear  my-2 p-3')
+            a(href='/')
+                i(class='fa-solid fa-right-from-bracket  my-2 p-3')
+        //- SIDEBAR ENDS HERE
+  
+        //- MAIN WORKING AREA STARTS HERE
+        .workplace(class='p-4 bg-light')
+            h1.mb-3.mb-4 Basic Task Manager
+            .task-categories(class='d-flex flex-row justify-content-between  p-1')
+                
+                .to-do-tasks(class='task-container border p-2')
+                    h4.mb-3 To-do
+                    
+                    .tasks
+                        if allTasks
+                            each task in allTasks
+                                if task.status == 'to-do'
+                                    .task(class='px-2 mb-2 pb-2 pt-1 bg-white') 
+                                        i(class="fa-solid fa-caret-right pt-2")
+                                        a(href='/task/to-do/' + task.id class='text-decoration-none text-capitalize text-dark h6 mx-2')=task.title
+                                        if task.text.trim().length > 140
+                                            p(class='pt-2 text-secondary')= task.text.slice(0, 140)
+                                                |...
+                                        else 
+                                            p(class='pt-2 text-secondary')= task.text
+
+                                        .time-posted.border-top.pt-2.d-flex.flex-row.justify-content-between.align-items-center
+                                            .time 
+                                                i(class="fas fa-clock")
+                                                span.mx-1 Date
+                                                - const d = new Date();
+                                                - let day = parseInt(d.getDate());
+                                            if day == task.time.Day
+                                                span= task.time.LocalTime
+                                            else if day >= task.time.Day + 2
+                                                span= task.time.LocalDate
+                                            else if day >= task.time.Day +1
+                                                span Yesterday
+                                            
+                    a(href='/add-new/to-do' class='d-block text-center')
+                        button(class='btn-to-do btn btn-sm rounded-circle mb-3 bg-light' type="button")
+                            i(class="fa-solid fa-plus")
+                
+                .progress-tasks(class='task-container border p-2')
+                    h4.mb-3 Progress
+                    p#count-progress
+                    .tasks
+                        if allTasks
+                            - let n = 0
+                            each task in allTasks
+                                if task.status == 'progress'
+                                    .task(class='px-2 mb-2 pb-2 pt-1 bg-white') 
+                                        i(class="fa-solid fa-caret-right pt-2")
+                                        a(href='/task/progress/' + task.id class='text-decoration-none text-dark h6 mx-2')=task.title
+                                        if task.text.trim().length > 140
+                                            p(class='pt-2 text-secondary')= task.text.slice(0, 140)
+                                                |...
+                                        else 
+                                            p(class='pt-2 text-secondary')= task.text
+
+                                        .time-posted.border-top.pt-2.d-flex.flex-row.justify-content-between.align-items-center
+                                                .time 
+                                                    i(class="fas fa-clock")
+                                                    span.mx-1 Date
+                                                    - const d = new Date();
+                                                    - let day = parseInt(d.getDate());
+                                                if day == task.time.Day
+                                                    span= task.time.LocalTime
+                                                else if day >= task.time.Day + 2
+                                                    span= task.time.LocalDate
+                                                else if day >= task.time.Day +1
+                                                    span Yesterday
+
+                    a(href='/add-new/progress' class='d-block text-center')
+                        button(class='btn-progress btn btn-sm rounded-circle mb-3 bg-light' type="button")
+                            i(class="fa-solid fa-plus")
+                    
+                .completed-tasks(class='task-container border p-2')
+                    h4.mb-3 Completed
+
+                    .tasks
+                        if allTasks
+                            each task in allTasks
+                                if task.status == 'completed'
+                                    .task(class='px-2 mb-2 pb-2 pt-1 bg-white') 
+                                        i(class="fa-solid fa-caret-right pt-2")
+                                        a(href='/task/completed/' + task.id class='text-decoration-none text-dark h6 mx-2')=task.title
+                                        if task.text.trim().length > 140
+                                            p(class='pt-2 text-secondary')= task.text.slice(0, 140)
+                                                |...
+                                        else 
+                                            p(class='pt-2 text-secondary')= task.text
+                                        .time-posted.border-top.pt-2.d-flex.flex-row.justify-content-between.align-items-center
+                                                .time 
+                                                    i(class="fas fa-clock")
+                                                    span.mx-1 Date
+                                                    - const d = new Date();
+                                                    - let day = parseInt(d.getDate());
+                                                if day == task.time.Day
+                                                    span= task.time.LocalTime
+                                                else if day >= task.time.Day + 2
+                                                    span= task.time.LocalDate
+                                                else if day >= task.time.Day +1
+                                                    span Yesterday
+                    a(href='/add-new/completed' class='d-block text-center')
+                        button(class='btn-completed btn btn-sm rounded-circle  mb-3 bg-light' type="button")
+                            i(class="fa-solid fa-plus")
