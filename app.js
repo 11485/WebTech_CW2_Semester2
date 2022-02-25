@@ -2,17 +2,21 @@ let express = require('express')
 let fs = require('fs')
 let path = require('path')
 let bodyParser = require('body-parser')
+const { json } = require('express')
 let app = express()
 
 app.set('view engine', 'pug')
-app.use('/task/:taskstatu/:taskid', express.static(path.join(__dirname, 'public', 'styles')))
-app.use('/', express.static(path.join(__dirname, 'public', 'styles')))
+
+app.use('/static', express.static(path.join(__dirname, 'public', 'styles')))
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: true}))
 
 app.get('/', (req, res) => {
     let id = req.params.id
     let posts = JSON.parse(fs.readFileSync('Tasks_file.json'))
-    res.render(path.join(__dirname, 'views', 'index'), { students: posts })
+    res.render(path.join(__dirname, 'views', 'index'), { allTasks: posts })
     // res.redirect("/logins")
 })
 
@@ -23,8 +27,10 @@ app.get('/about', (req, res) => {
 app.get('/task/:taskstatu/:taskid', (req, res) => {
     let id = req.params.taskid
     let status = req.params.taskstatus
+
     let tasks = JSON.parse(fs.readFileSync('Tasks_file.json'))
     .filter(item => item.id == id)[0]
+    
     res.render(path.join(__dirname, 'views', 'task'), { task : tasks })
 })
 
@@ -34,41 +40,123 @@ app.get('/logins', (req, res) => {
     res.render(path.join(__dirname, 'views', 'login'))
 })
 
+app.post('/add-new/to-do', (req, res) => {
+    let form = req.body
 
-// app.post('/account', (req, res) => {
-//     let username = req.body.userUsername.trim()
-//     if (username.length < 2){
-//         res.render(path.join(__dirname, 'views', 'login'), {error: true})
-//     }else{
-//         res.render(path.join(__dirname, 'views', 'login'), {error: false})
-//     }
-// })
+    if (form.title.length > 2 & form.text.length > 5 ){
+        var d = new Date()
+        let newtask = {
+            id: uid(),
+            title: form.title,
+            text: form.text,
+            status: 'to-do',
+            time: {
+                LocalTime: d.toLocaleTimeString(),
+                Day: d.getDate(),
+                LocalDate: d.toLocaleDateString()
+            }
+        }
 
-app.get('/new-task/to-do', (req, res) => {
-    res.send("soon todo")
+        try{
+            let taksavailable = JSON.parse(fs.readFileSync('Tasks_file.json'))
+            taksavailable.push(newtask)
+            fs.writeFileSync('Tasks_file.json', JSON.stringify(taksavailable))
+            let success = true
+            res.redirect('/')
+        }catch{
+            res.send("error")
+        }
+    }
+    else{
+        res.render(path.join(__dirname, 'views', 'to-do-add.pug'),{error: true})
+    }
 })
 
-app.get('/new-task/progress', (req, res) => {
+
+app.get('/add-new/to-do', (req, res) => {
+    
+    res.render(path.join(__dirname, 'views', 'to-do-add.pug'))
+    
+})
+
+// /////////////////////////////////////////////////////
+
+app.get('/add-new/progress', (req, res) => {
+    res.render(path.join(__dirname, 'views', 'progress-add.pug'))
+})
+
+app.post('/add-new/progress', (req, res) => {
+    let form = req.body
+    var d = new Date()
+    if (form.title.length > 2 & form.text.length > 5 ){
+        let newtask = {
+            id: uid(),
+            title: form.title,
+            text: form.text,
+            status: 'progress',
+            time: {
+                LocalTime: d.toLocaleTimeString(),
+                Day: d.getDate(),
+                LocalDate: d.toLocaleDateString()
+            }
+        }
+    
+        try{
+            let taksavailable = JSON.parse(fs.readFileSync('Tasks_file.json'))
+            taksavailable.push(newtask)
+            fs.writeFileSync('Tasks_file.json', JSON.stringify(taksavailable))
+            let success = true
+            res.redirect('/')
+        }catch{
+            res.send("error")
+        }
+    }else{
+        res.render(path.join(__dirname, 'views', 'progress-add.pug'),{error: true})
+    }
+})
+
+
+app.get('/add-new/completed', (req, res) => {
+    res.render(path.join(__dirname, 'views', 'completed-add.pug'))
+})
+
+app.post('/add-new/completed', (req, res) => {
+    let form = req.body
+    var d = new Date()
+    let newtask = {
+        id: uid(),
+        title: form.title,
+        text: form.text,
+        status: 'completed',
+        time: {
+            LocalTime: d.toLocaleTimeString(),
+            Day: d.getDate(),
+            LocalDate: d.toLocaleDateString()
+        }
+    }
+
+    try{
+        let taksavailable = JSON.parse(fs.readFileSync('Tasks_file.json'))
+        taksavailable.push(newtask)
+        fs.writeFileSync('Tasks_file.json', JSON.stringify(taksavailable))
+        let success = true
+        res.redirect('/')
+    }catch{
+        res.send("error")
+    }
+})
+
+app.get('/to-do/remove', (req, res) => {
+    res.send("SOON")
+})
+
+
+app.get('/add-new/progress', (req, res) => {
     res.send("soon progress")
 })
-
-app.get('/new-task/completed', (req, res) => {
+app.get('/add-new/completed', (req, res) => {
     res.send("soon completed")
 })
-
-// app.get('/new-task/:taskstatus', (req, res) => {
-//     let status = req.params.taskstatus
-//     if (status == 'to-do'){
-//         res.send("<h1>Adding data to " +"<em>TO-DO</em>" +  " list will be added soon</h1>")
-//     }else if (status == 'progress'){
-//         res.send("<h1>Adding data to " +"<em>PROGRESS</em>" +  " list will be added soon</h1>")
-//     }else if (status == 'completed'){
-//         res.send("<h1>Adding data to " +"<em>COMPLETED</em>" +  " list will be added soon</h1>")
-//     }else{
-//         res.send("fuck off")
-//     }
-// })
-
 
 app.get('/settings', (req, res) => {
     res.send('<h1>Settings ,To be added soon!</h1>')
@@ -78,6 +166,8 @@ app.get('/logout', (req, res) => {
     res.send('<h1>Log out ,To be added soon!</h1>')
 })
 
-
-
 app.listen(3000)
+
+function uid() {
+    return Math.random().toString(36).substr(2, 9) ;
+  };
