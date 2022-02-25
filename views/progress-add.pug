@@ -1,0 +1,15 @@
+extends layout.pug 
+block content 
+    include includes/nav.pug
+    .my_container 
+
+        if error
+            p.bg-danger Length
+            
+        form(action='/add-new/progress' method='POST')
+            h1.d-inline-block.m-3 Title 
+            input(name='title' type='text' placeholder='Task title')
+            br
+            h3.d-inline-block.m-3 Text
+            input(name='text' type='text' placeholder='Some texts')
+            button Save
